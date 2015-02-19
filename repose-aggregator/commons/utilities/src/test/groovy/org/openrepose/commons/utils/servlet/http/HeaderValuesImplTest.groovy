@@ -3,6 +3,7 @@ package org.openrepose.commons.utils.servlet.http
 import org.openrepose.commons.utils.http.HttpDate
 import org.openrepose.commons.utils.http.header.HeaderName
 import org.openrepose.commons.utils.http.header.HeaderValue
+import org.hamcrest.CoreMatchers
 import org.junit.Before
 import org.junit.Test
 
@@ -11,8 +12,6 @@ import javax.servlet.http.HttpServletRequest
 import static junit.framework.Assert.assertNull
 import static junit.framework.TestCase.assertFalse
 import static junit.framework.TestCase.assertTrue
-import static org.hamcrest.CoreMatchers.hasItem
-import static org.hamcrest.CoreMatchers.hasItems
 import static org.hamcrest.MatcherAssert.assertThat
 import static org.hamcrest.core.IsEqual.equalTo
 import static org.mockito.Matchers.anyString
@@ -85,7 +84,7 @@ class HeaderValuesImplTest {
     void "getHeaderNames returns an enumeration of header names"() throws Exception {
         Enumeration<String> headerNames = headerValues.getHeaderNames()
 
-        assertThat(Collections.list(headerNames), hasItems("Accept", "User-Agent"))
+        assertThat(Collections.list(headerNames), CoreMatchers.hasItems("Accept", "User-Agent"))
     }
 
     @Test
@@ -93,7 +92,7 @@ class HeaderValuesImplTest {
         List<String> acceptHeaders = Collections.list(headerValues.getHeaders("Accept"))
 
         assertThat(acceptHeaders.size(), equalTo(1))
-        assertThat(acceptHeaders, hasItem("text/plain"))
+        assertThat(acceptHeaders, CoreMatchers.hasItem("text/plain"))
     }
 
     @Test
